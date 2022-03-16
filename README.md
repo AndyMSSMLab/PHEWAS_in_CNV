@@ -24,7 +24,7 @@ cat Refseq_exon_hg38.txt |
 ```
  
 ## Defining technical control regions
-For control regions for the analysis of Multicopy genes, we utilized a set of “invariant genes”, defined as the 200 least variable (lowest Standard Deviation) genes in HGDP cohort and having pLI scores >0.9. 
+For control regions for the analysis of Multicopy genes, we utilized a set of “invariant genes”, defined as the 200 least variable (lowest Standard Deviation) genes in [HGDP cohort](https://www.internationalgenome.org/data-portal/data-collection/hgdp) and having pLI scores >0.9. 
 
 Control regions for VNTRs were the 1000 bp flanks on each side. Any part of the flank overlapping other VNTRs were trimmed.
 ```
@@ -40,7 +40,7 @@ cut -f 1-4 VNTR_100bp_10motif.bed |
 ```
  
 ## Read Depth generation and normalization
-The read depth for each Multicopy gene, Invariant gene, VNTR and their flanks were generated using mosdpeth [link].
+The read depth for each Multicopy gene, Invariant gene, VNTR and their flanks were generated using [mosdpeth](https://github.com/brentp/mosdepth).
 ```
 mosdepth -b "$PREFIX"_region.bed -f $GENOME -n $PREFIX $CRAM
 ```
@@ -57,5 +57,5 @@ The raw read depth were converted to counts by multiplying read depth by size of
 - Merging of multicopy genes in to gene groups (generateGeneGrp.r)
 
 ## PheWAS analysis
-- REGENIE on binary and quantitative traits on each TOPMed subcohort and Ancestry (runRegenie_binary.sh, runRegenie_quantitative.sh).
+- [REGENIE](https://rgcgithub.github.io/regenie/) on binary and quantitative traits on each TOPMed subcohort and Ancestry (runRegenie_binary.sh, runRegenie_quantitative.sh).
 - Merging of REGENIE output using [METAL](https://genome.sph.umich.edu/wiki/METAL_Documentation) (METAL_example_script.sh).
