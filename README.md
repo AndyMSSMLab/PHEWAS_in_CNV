@@ -1,5 +1,5 @@
-# PHEWAS analysis in CNV (Multicopy Genes and VNTRs)
-This repository contains scripts for performing PHEWAS analysis using CNVs (Multicopy Genes and VNTRs) with various phenotypes in [TOPMed cohort](https://topmed.nhlbi.nih.gov/), including data generation, data normalization, QC steps and PHEWAS analysis. All coordinates used in this pipeline were in UCSC Human Genome hg38.
+# PheWAS analysis in CNV (Multicopy Genes and VNTRs)
+This repository contains scripts for performing PheWAS analysis using CNVs (Multicopy Genes and VNTRs) with various phenotypes in [TOPMed cohort](https://topmed.nhlbi.nih.gov/), including data generation, data normalization, QC steps and PheWAS analysis. All coordinates used in this pipeline were in UCSC Human Genome hg38.
 
 ## Defining CNV regions
 VNTR regions were defined from the Simple Repeats track in the UCSC Genome Browser. We selected those VNTRs with motif >=10 bp and span >= 100 bp. Overlapping VNTRs were merged into single regions.
@@ -12,7 +12,7 @@ cat simpleRepeat.txt| \
   awk 'BEGIN{OFS = "\t"}{print $1,$2,$3,$1":"$2"-"$3,$4,$5,$6}' > VNTR_100bp_10motif.bed
 ```
 
-Multicopy genes were defined from the results of CNVnator analysis. We utilized the top most variable genes in in 625 Human Genome Diversity Panel [link] cohort. The Exon coordinates of these RefSeq genes were downloaded from UCSC browse and 100bp padding was added each side of the exon.
+Multicopy genes were defined from the results of CNVnator analysis. We utilized the top most variable genes in in 625 '[Human Genome Diversity Panel](https://www.internationalgenome.org/data-portal/data-collection/hgdp) cohort. The Exon coordinates of these RefSeq genes were downloaded from UCSC browser and 100bp padding was added each side of the exon.
 
 ```
 cat Refseq_exon_hg38.txt |
@@ -40,7 +40,7 @@ cut -f 1-4 VNTR_100bp_10motif.bed |
 ```
  
 ## Read Depth generation and normalization
-The read depth for each Multicopy gene, Invariant gene, VNTR and their flanks were generated using [mosdpeth](https://github.com/brentp/mosdepth).
+The read depth for each Multicopy gene, Invariant gene, VNTR and their flanks were generated using [mosdepth](https://github.com/brentp/mosdepth).
 ```
 mosdepth -b "$PREFIX"_region.bed -f $GENOME -n $PREFIX $CRAM
 ```
